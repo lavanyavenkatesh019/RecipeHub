@@ -44,6 +44,11 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
 
   const handleNav = (id) => {
     setMobileMenu(false);
+    if (!isAuth) {
+      navigate("/Login");
+      return;
+    }
+    
     if (window.location.pathname === "/Home") {
       const element = document.getElementById(id);
       if (element) {
@@ -303,7 +308,7 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
 
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-white shadow-xl z-50 transform transition-transform duration-300
-        ${mobileMenu ? "translate-y-0" : "-translate-y-full"}`}
+        ${mobileMenu ? "translate-x-0" : "translate-x-full"}`}
       >
 
         <div className="p-6 space-y-6">
@@ -344,10 +349,12 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
                     <button
                       key={recipe.id}
                       onClick={() => {
-                        navigate(`/ViewRecipe/${recipe.id}`);
-                        setShowDropdown(false);
-                        setSearchQuery("");
-                        setMobileMenu(false);
+                        handleAuthAction(() => {
+                          navigate(`/ViewRecipe/${recipe.id}`);
+                          setShowDropdown(false);
+                          setSearchQuery("");
+                          setMobileMenu(false);
+                        });
                       }}
                       className="w-full text-left px-4 py-3 hover:bg-orange-50 flex flex-col border-b border-orange-50 last:border-0"
                     >
@@ -364,72 +371,72 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
             )}
           </div>
 
-          <Link to="/Home" className="block text-orange-700">
+          <Link to="/Home" className="block text-orange-700 font-bold uppercase tracking-wider text-sm">
             Home
           </Link>
 
           <div 
             onClick={() => handleNav('categories')}
-            className="text-orange-700 cursor-pointer"
+            className="text-sm font-bold text-orange-700 hover:text-orange-900 transition-colors uppercase tracking-wider cursor-pointer"
           >
             Categories
           </div>
 
           <div 
             onClick={() => handleNav('recipes')}
-            className="text-orange-700 cursor-pointer"
+            className="text-sm font-bold text-orange-700 hover:text-orange-900 transition-colors uppercase tracking-wider cursor-pointer"
           >
             Recipes
           </div>
 
           <div 
             onClick={() => handleNav('about')}
-            className="text-orange-700 cursor-pointer"
+            className="text-sm font-bold text-orange-700 hover:text-orange-900 transition-colors uppercase tracking-wider cursor-pointer"
           >
             About
           </div>
 
           <div
-            onClick={onCreateClick}
-            className="text-orange-700 cursor-pointer"
+            onClick={() => handleAuthAction(() => onCreateClick())}
+            className="text-sm font-bold text-orange-700 hover:text-orange-900 transition-colors uppercase tracking-wider cursor-pointer"
           >
             Create
           </div>
 
-          <div>
-            <div
-              onClick={() => setProfileOpen(!profileOpen)}
-              className="text-orange-700 cursor-pointer"
-            >
-              Profile
-            </div>
-
-            {profileOpen && (
-              <div className="ml-4 mt-2 space-y-2">
-                {isAdmin ? (
-                  <div
-                    onClick={() => navigate("/Home/AdminPanel")}
-                    className="text-gray-600 cursor-pointer"
-                  >
-                    Admin Dashboard
-                  </div>
-                ) : (
-                  <div
-                    onClick={() => navigate("/Home/UserDashboard")}
-                    className="text-gray-600 cursor-pointer"
-                  >
-                    User Dashboard
-                  </div>
-                )}
-              </div>
-            )}
-
+          <div
+            onClick={() => handleAuthAction(() => setProfileOpen(!profileOpen))}
+            className="text-sm font-bold text-orange-700 hover:text-orange-900 transition-colors uppercase tracking-wider cursor-pointer"
+          >
+            Profile
           </div>
 
+          {profileOpen && (
+            <div className="ml-4 space-y-3 pt-2">
+              {isAuth ? (
+                <button
+                  onClick={() => {
+                    navigate(isAdmin ? "/Home/AdminPanel" : "/Home/UserDashboard");
+                    setMobileMenu(false);
+                  }}
+                  className="block text-xs font-bold text-gray-500 uppercase tracking-widest hover:text-orange-600"
+                >
+                  Dashboard
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    navigate("/Login");
+                    setMobileMenu(false);
+                  }}
+                  className="block text-xs font-bold text-orange-600 uppercase tracking-widest"
+                >
+                  Login
+                </button>
+              )}
+            </div>
+          )}
         </div>
-
       </div>
-
     </nav>
   );
 };

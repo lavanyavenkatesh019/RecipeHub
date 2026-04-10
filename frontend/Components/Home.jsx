@@ -71,6 +71,21 @@ const RecipeApp = () => {
     }
   };
 
+  const handleNav = (id) => {
+    if (isAuthenticated()) {
+      if (id === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    } else {
+      navigate("/Login");
+    }
+  };
+
   useEffect(() => {
     document.body.classList.add('no-scrollbar');
     return () => document.body.classList.remove('no-scrollbar');
@@ -459,7 +474,14 @@ const RecipeApp = () => {
               <div>
                 <h4 className="text-xl font-bold mb-6 tracking-wider uppercase border-b-2 border-orange-500 pb-2 inline-block">Newsletter</h4>
                 <p className="text-orange-100 mb-6 leading-relaxed">Subscribe for the latest sweet treats and savory eats directly in your inbox.</p>
-                <form className="relative group" onSubmit={(e) => e.preventDefault()}>
+                <form className="relative group" onSubmit={(e) => {
+                  e.preventDefault();
+                  if (!isAuthenticated()) {
+                    navigate("/Login");
+                  } else {
+                    toast.success("Subscribed successfully!");
+                  }
+                }}>
                   <div className="flex bg-white/10 rounded-full p-1 border border-white/20 group-focus-within:border-white transition-colors">
                     <input type="email" placeholder="Your email address" className="bg-transparent text-white px-4 py-2 w-full focus:outline-none placeholder-orange-200/50" required />
                     <button type="submit" className="bg-white text-orange-600 px-6 py-2 rounded-full font-bold hover:bg-orange-50 hover:scale-105 transition-all shadow-sm flex items-center justify-center">
