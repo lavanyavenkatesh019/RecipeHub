@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebookF } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from '../utils/authUtils'
 import toast from "react-hot-toast";
@@ -42,10 +40,6 @@ const Signin = () => {
               <h1 className='flex justify-center text-white font-semibold text-3xl'>
                 Create Account
               </h1>
-            </div>
-            <div className='flex flex-row space-x-5 mb-4'>
-                <button type="button" className="w-full py-2 px-4 bg-white/30 text-white font-semibold rounded-lg hover:bg-white/40 transition duration-300 flex items-center justify-center gap-2">Sign In <FcGoogle className='text-xl'/></button>
-                <button type="button" className="w-full py-2 px-4 bg-white/30 text-white font-semibold rounded-lg hover:bg-white/40 transition duration-300 flex items-center justify-center gap-2">Sign In <FaFacebookF className='text-xl'/></button>
             </div>
 
             <form className='flex flex-col space-y-4' onSubmit={onsubmit}>
