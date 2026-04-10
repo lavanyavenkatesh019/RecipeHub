@@ -10,6 +10,7 @@ import CreateRecipe from './CreateRecipe';
 import { motion } from "framer-motion";
 import LogoIcon from "./LogoIcon";
 import { API_BASE_URL } from "../utils/apiConfig";
+import { isAuthenticated } from "../utils/authUtils";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
@@ -62,6 +63,14 @@ const RecipeApp = () => {
 
   const [currentHero, setCurrentHero] = useState(0);
 
+  const handleAuthNav = (path, state) => {
+    if (isAuthenticated()) {
+      navigate(path, { state });
+    } else {
+      navigate("/Login");
+    }
+  };
+
   useEffect(() => {
     document.body.classList.add('no-scrollbar');
     return () => document.body.classList.remove('no-scrollbar');
@@ -80,7 +89,7 @@ const RecipeApp = () => {
  
   return (            
     <div className="overflow-x-hidden">
-        <Navbar onCreateClick={() => setShowCreate(true)} />
+        <Navbar onCreateClick={() => handleAuthNav(null, null) /* This will trigger redirect since onCreateClick is passed as a function */} />
         
         {/* HERO SECTION WITH CAROUSEL */}
         <section className="relative w-full h-[90vh] overflow-hidden">
@@ -120,7 +129,7 @@ const RecipeApp = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => navigate("/Home/Recipes")}
+                onClick={() => handleAuthNav("/Home/Recipes")}
                 className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-full font-bold shadow-xl flex items-center gap-3 transition-colors"
               >
                 Explore Recipes <FaArrowRight />
@@ -155,7 +164,7 @@ const RecipeApp = () => {
               </h2>
               <p className="text-orange-700/80 text-lg max-w-2xl mx-auto">Explore flavors from around the world curated just for you.</p>
             </motion.div>
-
+ 
             <motion.div 
               variants={staggerContainer}
               initial="hidden"
@@ -176,7 +185,7 @@ const RecipeApp = () => {
                   variants={fadeIn}
                   whileHover="hover"
                   initial="rest"
-                  onClick={() => navigate("/Home/Recipes", { state: { category: category.name } })}
+                  onClick={() => handleAuthNav("/Home/Recipes", { category: category.name })}
                   className="min-w-[280px] group cursor-pointer rounded-3xl bg-white shadow-xl hover:shadow-2xl transition-all border border-orange-100 overflow-hidden"
                 >
                   <motion.div variants={hoverScale} className="relative h-56 overflow-hidden rounded-t-3xl">
@@ -220,7 +229,7 @@ const RecipeApp = () => {
                 <h2 className="text-4xl md:text-5xl font-extrabold text-orange-900">Top Recipes</h2>
               </div>
               <div className="flex gap-4">
-                <button onClick={() => navigate("/Home/Recipes", { state: { isTopTen: true } })} className="hidden md:flex text-orange-600 font-bold hover:text-orange-800 transition-colors items-center gap-2">
+                <button onClick={() => handleAuthNav("/Home/Recipes", { isTopTen: true })} className="hidden md:flex text-orange-600 font-bold hover:text-orange-800 transition-colors items-center gap-2">
                   View All <FaArrowRight />
                 </button>
               </div>
@@ -242,12 +251,12 @@ const RecipeApp = () => {
                   <motion.div
                     key={index}
                     whileHover={{ y: -10 }}
-                    onClick={() => navigate(`/ViewRecipe/${recipe.id}`)}
+                    onClick={() => handleAuthNav(`/ViewRecipe/${recipe.id}`)}
                     className="group relative bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_40px_80px_rgba(255,107,0,0.15)] transition-all duration-500 border border-orange-100/50 overflow-hidden cursor-pointer flex flex-col"
                   >
                     <div 
                       className="relative h-64 overflow-hidden cursor-pointer"
-                      onClick={() => navigate(`/ViewRecipe/${recipe.id}`)}
+                      onClick={() => handleAuthNav(`/ViewRecipe/${recipe.id}`)}
                     >
                       <img
                         src={recipe.imageUrl || "/Picture/paneer.jpg"}
@@ -275,7 +284,7 @@ const RecipeApp = () => {
                       </div>
 
                       <button 
-                        onClick={(e) => { e.stopPropagation(); navigate(`/ViewRecipe/${recipe.id}`); }}
+                        onClick={(e) => { e.stopPropagation(); handleAuthNav(`/ViewRecipe/${recipe.id}`); }}
                         className="w-full bg-orange-50 hover:bg-orange-500 text-orange-600 hover:text-white py-3 px-6 rounded-2xl font-bold text-md transition-all duration-300">
                         View Recipe
                       </button>

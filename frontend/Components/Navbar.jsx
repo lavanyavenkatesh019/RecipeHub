@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaUser, FaBars, FaTimes, FaSearch } from "react-icons/fa";
-import { isAdmin as checkIsAdmin, logoutUser, authFetch } from '../utils/authUtils';
+import { isAdmin as checkIsAdmin, logoutUser, authFetch, isAuthenticated } from '../utils/authUtils';
 import toast from 'react-hot-toast';
 import LogoIcon from "./LogoIcon";
 import { API_BASE_URL } from "../utils/apiConfig";
@@ -23,6 +23,15 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
   
   const username = localStorage.getItem("username");
   const isAdmin = checkIsAdmin();
+  const isAuth = isAuthenticated();
+
+  const handleAuthAction = (action) => {
+    if (isAuth) {
+      action();
+    } else {
+      navigate("/Login");
+    }
+  };
 
   // Listen for storage changes to update profile picture across components
   useEffect(() => {
@@ -60,6 +69,11 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
   const handleSearch = async (e) => {
     if (e.key !== 'Enter' || !searchQuery.trim()) return;
     
+    if (!isAuth) {
+      navigate("/Login");
+      return;
+    }
+
     setIsSearching(true);
     try {
       const response = await fetch(`${API_BASE_URL}/Recipes/search?q=${encodeURIComponent(searchQuery.trim())}`);
@@ -181,7 +195,7 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
                     <button
                       key={recipe.id}
                       onClick={() => {
-                        navigate(`/ViewRecipe/${recipe.id}`);
+                        handleAuthAction(() => navigate(`/ViewRecipe/${recipe.id}`));
                         setShowDropdown(false);
                         setSearchQuery("");
                       }}
@@ -212,7 +226,7 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
 
           <div className="flex items-center gap-3 flex-shrink-0">
             <button
-              onClick={onCreateClick}
+              onClick={() => handleAuthAction(() => onCreateClick())}
               className="hidden sm:block bg-orange-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-orange-100 hover:bg-orange-600 hover:shadow-xl hover:scale-[1.02] transition-all"
             >
               + Create
@@ -224,7 +238,7 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white overflow-hidden border border-orange-200"
               >
-                {profilePicture ? (
+                {profilePicture && isAuth ? (
                   <img src={profilePicture} alt="profile" className="w-full h-full object-cover" />
                 ) : (
                   <FaUser />
@@ -235,30 +249,44 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
                 <div className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-2xl py-2 z-[70] border border-orange-100 overflow-hidden">
                   <div className="px-4 py-2 border-b border-gray-50 mb-1 bg-orange-50/30">
                     <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Signed in as</p>
-                    <p className="text-sm font-bold text-orange-950 truncate">{username}</p>
+                    <p className="text-sm font-bold text-orange-950 truncate">{isAuth ? username : "Guest"}</p>
                   </div>
 
-                  <button
-                    onClick={() => {
-                      navigate(isAdmin ? "/Home/AdminPanel" : "/Home/UserDashboard");
-                      setUserMenuOpen(false);
-                    }}
-                    className="w-full text-left px-4 py-2.5 hover:bg-orange-50 font-medium text-gray-700 transition-colors"
-                  >
-                    Dashboard
-                  </button>
+                  {isAuth ? (
+                    <>
+                      <button
+                        onClick={() => {
+                          navigate(isAdmin ? "/Home/AdminPanel" : "/Home/UserDashboard");
+                          setUserMenuOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-2.5 hover:bg-orange-50 font-medium text-gray-700 transition-colors"
+                      >
+                        Dashboard
+                      </button>
 
-                  <div className="border-t border-gray-50 mt-1 pt-1">
+                      <div className="border-t border-gray-50 mt-1 pt-1">
+                        <button
+                          onClick={() => {
+                            handleLogout();
+                            setUserMenuOpen(false);
+                          }}
+                          className="w-full text-left px-4 py-2.5 hover:bg-red-50 font-medium text-red-600 transition-colors"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    </>
+                  ) : (
                     <button
                       onClick={() => {
-                        handleLogout();
+                        navigate("/Login");
                         setUserMenuOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2.5 hover:bg-red-50 font-medium text-red-600 transition-colors"
+                      className="w-full text-left px-4 py-2.5 hover:bg-orange-50 font-medium text-orange-600 transition-colors"
                     >
-                      Logout
+                      Login / Sign In
                     </button>
-                  </div>
+                  )}
                 </div>
               )}
             </div>

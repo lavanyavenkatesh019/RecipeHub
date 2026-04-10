@@ -6,11 +6,7 @@ const Landing = () => {
   const nav = useNavigate();
 
   const handleStart = () => {
-    if (isAuthenticated()) {
-      nav("/Home");
-    } else {
-      nav("/Login");
-    }
+    nav("/Home");
   };
 
   return (

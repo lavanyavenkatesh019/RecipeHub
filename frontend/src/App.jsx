@@ -26,9 +26,9 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Signin" element={<Signin />} />
           
+          <Route path="/Home" element={<Home />} />
           {/* Protected Routes */}
           <Route element={<Protected />}>
-            <Route path="/Home" element={<Home />} />
             <Route path="/Home/Recipes" element={<Recipes />} />
             <Route path="/Home/UserDashboard" element={<UserDashboard />} />
             <Route path="/ViewRecipe/:id" element={<ViewRecipe />} />
