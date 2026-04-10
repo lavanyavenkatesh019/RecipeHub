@@ -33,17 +33,17 @@ const Landing = () => {
             </span>
           </div>
 
-          <div className="flex gap-3 sm:gap-5">
+          <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-5">
 
             <Link to="/Login">
-              <button className="w-20 sm:w-24 h-9 sm:h-10 text-white rounded-2xl shadow-lg transition duration-300 hover:bg-amber-200 hover:text-black">
+              <button className="px-4 h-9 sm:h-10 text-white rounded-2xl shadow-lg border border-white/30 transition duration-300 hover:bg-amber-200 hover:text-black text-sm font-bold">
                 Login
               </button>
             </Link>
 
             <Link to="/Signin">
-              <button className="w-20 sm:w-24 h-9 sm:h-10 text-white rounded-2xl shadow-lg transition duration-300 hover:bg-amber-200 hover:text-black">
-                Sign In
+              <button className="px-4 h-9 sm:h-10 bg-orange-500 text-white rounded-2xl shadow-lg transition duration-300 hover:bg-amber-200 hover:text-black text-sm font-bold whitespace-nowrap">
+                Sign Up
               </button>
             </Link>
           </div>
