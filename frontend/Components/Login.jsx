@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import { loginUser } from '../utils/authUtils'
 import toast from 'react-hot-toast'
 import { API_BASE_URL } from '../utils/apiConfig'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const Login = () => {
   const navigate = useNavigate()
   
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [showForgotModal, setShowForgotModal] = useState(false);
 
@@ -45,12 +47,26 @@ const Login = () => {
                  <div>
                   <label className="block mb-1 text-white font-medium">Username</label>
                   <input type="text" value={username} onChange={(e)=>setUsername(e.target.value)} placeholder="Username"
-                    className="w-full px-4 py-2 rounded-lg bg-white/30 text-white placeholder-white/70 border border-white/30 focus:outline-none focus:ring-2 focus:ring-white"/>
+                    className="w-full px-4 py-2 rounded-lg bg-white/60 text-black placeholder-gray-600 border border-white/30 focus:outline-none focus:ring-2 focus:ring-orange-500"/>
                   </div>
                   <div>
                     <label className="block mb-1 text-white font-medium">Password</label>
-                    <input type="password" value={password} placeholder="Password" onChange={(e)=>setPassword(e.target.value)}
-                      className="w-full px-4 py-2 rounded-lg bg-white/30 text-white placeholder-white/70 border border-white/30 focus:outline-none focus:ring-2 focus:ring-white"/>
+                    <div className="relative">
+                      <input 
+                        type={showPassword ? "text" : "password"} 
+                        value={password} 
+                        placeholder="Password" 
+                        onChange={(e)=>setPassword(e.target.value)}
+                        className="w-full px-4 py-2 rounded-lg bg-white/60 text-black placeholder-gray-600 border border-white/30 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                      <button 
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-orange-600 transition-colors"
+                      >
+                        {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                      </button>
+                    </div>
                   </div>
                    <button type="submit" className="w-full py-2 mt-4 px-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg shadow-lg transition duration-300">Log In</button>
             </form>

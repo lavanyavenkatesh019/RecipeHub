@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { registerUser } from '../utils/authUtils'
 import toast from "react-hot-toast";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Signin = () => {
   const navigate = useNavigate();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const onsubmit = async (e) => {
     e.preventDefault();
@@ -46,17 +48,31 @@ const Signin = () => {
                 <div>
                     <label className="block mb-1 text-white font-medium">Username</label>
                     <input type="text" placeholder="Username" value={fullName} onChange={(e) => setFullName(e.target.value)}
-                    className="w-full px-4 py-2 rounded-lg bg-white/30 text-white placeholder-white/70 border border-white/30 focus:outline-none focus:ring-2 focus:ring-white"/>
+                    className="w-full px-4 py-2 rounded-lg bg-white/60 text-black placeholder-gray-600 border border-white/30 focus:outline-none focus:ring-2 focus:ring-orange-500"/>
                 </div>
                 <div>
                     <label className="block mb-1 text-white font-medium">E-mail</label>
                     <input type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-2 rounded-lg bg-white/30 text-white placeholder-white/70 border border-white/30 focus:outline-none focus:ring-2 focus:ring-white"/>
+                    className="w-full px-4 py-2 rounded-lg bg-white/60 text-black placeholder-gray-600 border border-white/30 focus:outline-none focus:ring-2 focus:ring-orange-500"/>
                 </div>
                 <div>
                     <label className="block mb-1 text-white font-medium">Password</label>
-                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-2 rounded-lg bg-white/30 text-white placeholder-white/70 border border-white/30 focus:outline-none focus:ring-2 focus:ring-white"/>
+                    <div className="relative">
+                      <input 
+                        type={showPassword ? "text" : "password"} 
+                        placeholder="Password" 
+                        value={password} 
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full px-4 py-2 rounded-lg bg-white/60 text-black placeholder-gray-600 border border-white/30 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      />
+                      <button 
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-orange-600 transition-colors"
+                      >
+                        {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                      </button>
+                    </div>
                 </div>
                 
                 <button type="submit" className="w-full py-2 mt-4 px-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg shadow-lg transition duration-300">Sign Up</button>
