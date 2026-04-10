@@ -1,18 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Landing from "../Demo/Landing";
-import Login from "../Demo/Login";
-import Signin from "../Demo/Signin";
-import Home from "../Demo/Home";
-import Recipes from "../Demo/Recipes";
-import ViewRecipe from "../Demo/ViewRecipe";
-import UserDashboard from "../Demo/UserDashboard";
-import AdminPanel from "../Demo/AdminPanel";
-import UserManagement from "../Demo/UserManagement";
-import RecipeManagement from "../Demo/RecipeManagement";
-import Reports from "../Demo/Reports";
-import VeganRecipe from "../Demo/VeganRecipe";
-import Protected from "../Demo/Protected";
+import Landing from "../Components/Landing";
+import Login from "../Components/Login";
+import Signin from "../Components/Signin";
+import Home from "../Components/Home";
+import Recipes from "../Components/Recipes";
+import ViewRecipe from "../Components/ViewRecipe";
+import UserDashboard from "../Components/UserDashboard";
+import AdminPanel from "../Components/AdminPanel";
+import UserManagement from "../Components/UserManagement";
+import RecipeManagement from "../Components/RecipeManagement";
+import Reports from "../Components/Reports";
+import VeganRecipe from "../Components/VeganRecipe";
+import Protected from "../Components/Protected";
 
 import { Toaster } from "react-hot-toast";
 
