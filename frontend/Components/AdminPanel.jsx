@@ -170,13 +170,13 @@ const AdminPanel = () => {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col h-full overflow-y-auto overflow-x-hidden relative bg-orange-50/20">
         <main className="p-6 md:p-12 animate-in fade-in slide-in-from-bottom-4 duration-700 font-sans">
-          {/* Desktop Summary Info (Hidden on Mobile as it's in the header) */}
-          <div className="hidden md:flex justify-between items-center mb-12">
+          {/* Section Heading - Show on all sizes */}
+          <div className="flex justify-between items-center mb-8 md:mb-12">
             <div>
-              <h2 className="text-4xl font-extrabold text-orange-900 tracking-tight uppercase">
+              <h2 className="text-2xl md:text-4xl font-extrabold text-orange-900 tracking-tight uppercase">
                 {activeTab.replace("_", " ")} Overview
               </h2>
-              <p className="text-orange-700/60 font-medium mt-1">Platform metrics and moderation control.</p>
+              <p className="text-orange-700/60 text-sm md:text-base font-medium mt-1">Platform metrics and moderation control.</p>
             </div>
           </div>
 
