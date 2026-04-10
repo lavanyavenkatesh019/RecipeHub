@@ -89,7 +89,13 @@ const RecipeApp = () => {
  
   return (            
     <div className="overflow-x-hidden">
-        <Navbar onCreateClick={() => handleAuthNav(null, null) /* This will trigger redirect since onCreateClick is passed as a function */} />
+        <Navbar onCreateClick={() => {
+            if (isAuthenticated()) {
+              setShowCreate(true);
+            } else {
+              navigate("/Login");
+            }
+        }} />
         
         {/* HERO SECTION WITH CAROUSEL */}
         <section className="relative w-full h-[90vh] overflow-hidden">
