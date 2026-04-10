@@ -26,11 +26,13 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Signin" element={<Signin />} />
           
-          <Route path="/Home" element={<Home />} />
-          <Route path="/Home/Recipes" element={<Recipes />} />
           {/* Protected Routes */}
           <Route element={<Protected />}>
+            <Route path="/Home" element={<Home />} />
+            <Route path="/Home/Recipes" element={<Recipes />} />
             <Route path="/Home/UserDashboard" element={<UserDashboard />} />
+            <Route path="/ViewRecipe/:id" element={<ViewRecipe />} />
+            <Route path="/Vegan" element={<VeganRecipe />} />
             
             {/* Admin Routes */}
             <Route path="/Home/AdminPanel" element={<AdminPanel />} />
@@ -38,9 +40,6 @@ function App() {
             <Route path="/Home/RecipeManagement" element={<RecipeManagement />} />
             <Route path="/Home/Reports" element={<Reports />} />
           </Route>
-          
-          <Route path="/ViewRecipe/:id" element={<ViewRecipe />} />
-          <Route path="/Vegan" element={<VeganRecipe />} />
           
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

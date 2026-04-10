@@ -1,9 +1,17 @@
-import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LogoIcon from "./LogoIcon";
-const Landing = () => {
+import { isAuthenticated } from "../utils/authUtils";
 
-  const nav = useNavigate()
+const Landing = () => {
+  const nav = useNavigate();
+
+  const handleStart = () => {
+    if (isAuthenticated()) {
+      nav("/Home");
+    } else {
+      nav("/Login");
+    }
+  };
 
   return (
     <div className="w-full h-screen relative overflow-hidden">
@@ -22,7 +30,7 @@ const Landing = () => {
 
         <div className="flex justify-between items-center px-6 py-4">
 
-          <div className="cursor-pointer flex items-center gap-4 bg-transparent" onClick={() => nav("/Home")}>
+          <div className="cursor-pointer flex items-center gap-4 bg-transparent" onClick={handleStart}>
             <LogoIcon color="white" className="h-16 w-16 transition-transform hover:scale-105" />
             <span className="text-4xl font-black text-white tracking-tighter">
               RecipeHub
@@ -48,11 +56,12 @@ const Landing = () => {
           <h1 className="text-white text-3xl sm:text-5xl md:text-6xl font-bold">
             Your Kitchen, Your Stories.
           </h1>
-          <Link to="/Home">
-            <button className="text-white font-semibold px-6 sm:px-8 py-2 sm:py-3 rounded-xl shadow-lg transition duration-300 hover:bg-amber-200 hover:text-black">
-              Get Started
-            </button>
-          </Link>
+          <button 
+            onClick={handleStart}
+            className="text-white font-semibold px-6 sm:px-8 py-2 sm:py-3 rounded-xl shadow-lg transition duration-300 hover:bg-amber-200 hover:text-black"
+          >
+            Get Started
+          </button>
         </div>
       </div>
     </div>
