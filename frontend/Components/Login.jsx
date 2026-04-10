@@ -33,7 +33,7 @@ const Login = () => {
   return (
     <>
     <div>
-        <div className='min-h-screen bg-[url(Picture//Dishimage.jpg)] bg-cover bg-right-top w-full'>
+        <div className='min-h-screen bg-[url(/Picture/Dishimage.jpg)] bg-cover bg-right-top w-full'>
         <div id='view1fg' className='absolute w-full top-0 h-screen bg-white/10 backdrop-blur-none border border-white/20 rounded-lg p-6 shadow-lg  flex justify-center items-center'>
         <div className="w-full max-h-md max-w-md mt-0 px-8 py-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl shadow-lg">
             <div className='h-15'>
