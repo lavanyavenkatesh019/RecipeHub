@@ -78,16 +78,16 @@ const Reports = ({ onDeletePrompt }) => {
   };
 
   return (
-    <div className="p-6 md:p-8">
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-8 gap-4">
-        <h2 className="text-3xl font-bold text-gray-800">Content Moderation</h2>
-        <div className="flex bg-gray-200 p-1 rounded-xl">
+    <div className="p-0 md:p-8">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-10 gap-6">
+        <h2 className="text-2xl md:text-3xl font-black text-gray-800 tracking-tight">Content Moderation</h2>
+        <div className="flex bg-gray-200/50 p-1.5 rounded-2xl overflow-x-auto no-scrollbar gap-1">
           {["Pending", "Resolved", "Archived"].map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2 rounded-lg font-bold transition-all ${
-                activeTab === tab ? "bg-white text-orange-600 shadow-md" : "text-gray-600 hover:text-gray-800"
+              className={`px-8 py-2.5 rounded-xl font-bold transition-all whitespace-nowrap flex-shrink-0 ${
+                activeTab === tab ? "bg-white text-orange-600 shadow-lg shadow-orange-100/50" : "text-gray-500 hover:text-gray-800"
               }`}
             >
               {tab} ({counts[tab]})
