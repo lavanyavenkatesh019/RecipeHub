@@ -24,25 +24,20 @@ const Landing = () => {
 
       <div className="relative z-10 flex flex-col h-full">
 
-        <div className="flex justify-between items-center px-6 py-4">
-
-          <div className="cursor-pointer flex items-center gap-4 bg-transparent" onClick={handleStart}>
-            <LogoIcon color="white" className="h-16 w-16 transition-transform hover:scale-105" />
-            <span className="text-4xl font-black text-white tracking-tighter">
-              RecipeHub
-            </span>
+        <div className="flex justify-between items-center px-4 sm:px-6 py-6 sm:py-8 flex-nowrap">
+          <div className="cursor-pointer flex items-center bg-transparent group" onClick={handleStart}>
+            <LogoIcon color="white" className="h-12 w-12 sm:h-14 sm:w-14 md:h-20 md:w-20 transition-transform group-hover:scale-110 drop-shadow-2xl" />
           </div>
 
-          <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-5">
-
+          <div className="flex items-center justify-end gap-2 sm:gap-3 flex-nowrap">
             <Link to="/Login">
-              <button className="px-4 h-9 sm:h-10 text-white rounded-2xl shadow-lg border border-white/30 transition duration-300 hover:bg-amber-200 hover:text-black text-sm font-bold">
+              <button className="px-4 sm:px-6 h-10 sm:h-11 md:h-12 text-white rounded-xl sm:rounded-2xl shadow-xl border-2 border-white/30 backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-black text-xs sm:text-sm md:text-base font-black uppercase tracking-widest whitespace-nowrap">
                 Login
               </button>
             </Link>
 
             <Link to="/Signin">
-              <button className="px-4 h-9 sm:h-10 bg-orange-500 text-white rounded-2xl shadow-lg transition duration-300 hover:bg-amber-200 hover:text-black text-sm font-bold whitespace-nowrap">
+              <button className="px-4 sm:px-6 h-10 sm:h-11 md:h-12 text-white rounded-xl sm:rounded-2xl shadow-xl border-2 border-white/30 backdrop-blur-md transition-all duration-300 hover:bg-white hover:text-black text-xs sm:text-sm md:text-base font-black uppercase tracking-widest whitespace-nowrap">
                 Sign Up
               </button>
             </Link>
