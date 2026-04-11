@@ -26,7 +26,7 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
   const isAuth = isAuthenticated();
 
   const handleAuthAction = (action) => {
-    if (isAuth) {
+    if (isAuthenticated()) {
       action();
     } else {
       navigate("/Login");
@@ -44,7 +44,7 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
 
   const handleNav = (id) => {
     setMobileMenu(false);
-    if (!isAuth) {
+    if (!isAuthenticated()) {
       navigate("/Login");
       return;
     }
@@ -74,7 +74,7 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
   const handleSearch = async (e) => {
     if (e.key !== 'Enter' || !searchQuery.trim()) return;
     
-    if (!isAuth) {
+    if (!isAuthenticated()) {
       navigate("/Login");
       return;
     }
@@ -142,7 +142,7 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
       {/* Main Container */}
       <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
 
-        <div className="flex-shrink-0 cursor-pointer flex items-center gap-2" onClick={() => navigate("/Home")}>
+        <div className="flex-shrink-0 cursor-pointer flex items-center gap-2" onClick={() => handleAuthAction(() => navigate("/Home"))}>
           <LogoIcon className="h-10 w-10 md:h-12 md:w-12 transition-transform hover:scale-110" />
           <span className="text-3xl font-black text-orange-600 tracking-tighter">
             RecipeHub
@@ -152,9 +152,12 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
         {/* 2. Center Section: Navigation & Search */}
         <div className="hidden lg:flex flex-1 items-center justify-center gap-10">
           <div className="flex items-center gap-8">
-            <Link to="/Home" className="text-sm font-bold text-orange-700 hover:text-orange-900 transition-colors uppercase tracking-wider">
+            <button 
+              onClick={() => handleNav('home')}
+              className="text-sm font-bold text-orange-700 hover:text-orange-900 transition-colors uppercase tracking-wider"
+            >
               Home
-            </Link>
+            </button>
             <button 
               onClick={() => handleNav('categories')}
               className="text-sm font-bold text-orange-700 hover:text-orange-900 transition-colors uppercase tracking-wider"
@@ -371,9 +374,12 @@ const Navbar = ({ onCreateClick, onMenuClick }) => {
             )}
           </div>
 
-          <Link to="/Home" className="block text-orange-700 font-bold uppercase tracking-wider text-sm">
+          <button 
+            onClick={() => handleNav('home')}
+            className="block text-orange-700 font-bold uppercase tracking-wider text-sm text-left"
+          >
             Home
-          </Link>
+          </button>
 
           <div 
             onClick={() => handleNav('categories')}

@@ -441,10 +441,10 @@ const RecipeApp = () => {
                   Your ultimate culinary companion. Discover, create, and share the most delicious recipes from around the world.
                 </p>
                 <div className="flex gap-4 pt-4">
-                  <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-orange-600 hover:-translate-y-1 transition-all duration-300 shadow-sm"><FaFacebookF /></a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-orange-600 hover:-translate-y-1 transition-all duration-300 shadow-sm"><FaInstagram /></a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-orange-600 hover:-translate-y-1 transition-all duration-300 shadow-sm"><FaTwitter /></a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-orange-600 hover:-translate-y-1 transition-all duration-300 shadow-sm"><FaWhatsapp /></a>
+                  <a href="#" onClick={(e) => { e.preventDefault(); if (!isAuthenticated()) navigate("/Login"); }} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-orange-600 hover:-translate-y-1 transition-all duration-300 shadow-sm"><FaFacebookF /></a>
+                  <a href="#" onClick={(e) => { e.preventDefault(); if (!isAuthenticated()) navigate("/Login"); }} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-orange-600 hover:-translate-y-1 transition-all duration-300 shadow-sm"><FaInstagram /></a>
+                  <a href="#" onClick={(e) => { e.preventDefault(); if (!isAuthenticated()) navigate("/Login"); }} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-orange-600 hover:-translate-y-1 transition-all duration-300 shadow-sm"><FaTwitter /></a>
+                  <a href="#" onClick={(e) => { e.preventDefault(); if (!isAuthenticated()) navigate("/Login"); }} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-orange-600 hover:-translate-y-1 transition-all duration-300 shadow-sm"><FaWhatsapp /></a>
                 </div>
               </div>
 
@@ -463,10 +463,10 @@ const RecipeApp = () => {
               <div>
                 <h4 className="text-xl font-bold mb-6 tracking-wider uppercase border-b-2 border-orange-500 pb-2 inline-block">Top Picks</h4>
                 <ul className="space-y-4">
-                  <li><a href="#" className="text-orange-100 hover:text-white hover:translate-x-2 transition-transform inline-flex items-center gap-2"><FaArrowRight className="text-xs text-orange-300" /> Healthy & Vegan</a></li>
-                  <li><a href="#" className="text-orange-100 hover:text-white hover:translate-x-2 transition-transform inline-flex items-center gap-2"><FaArrowRight className="text-xs text-orange-300" /> Quick Breakfasts</a></li>
-                  <li><a href="#" className="text-orange-100 hover:text-white hover:translate-x-2 transition-transform inline-flex items-center gap-2"><FaArrowRight className="text-xs text-orange-300" /> Decadent Desserts</a></li>
-                  <li><a href="#" className="text-orange-100 hover:text-white hover:translate-x-2 transition-transform inline-flex items-center gap-2"><FaArrowRight className="text-xs text-orange-300" /> Special Dinners</a></li>
+                  <li><a href="#" onClick={(e) => { e.preventDefault(); handleAuthNav("/Home/Recipes", { category: "Vegan" }); }} className="text-orange-100 hover:text-white hover:translate-x-2 transition-transform inline-flex items-center gap-2"><FaArrowRight className="text-xs text-orange-300" /> Healthy & Vegan</a></li>
+                  <li><a href="#" onClick={(e) => { e.preventDefault(); handleAuthNav("/Home/Recipes", { category: "Breakfast" }); }} className="text-orange-100 hover:text-white hover:translate-x-2 transition-transform inline-flex items-center gap-2"><FaArrowRight className="text-xs text-orange-300" /> Quick Breakfasts</a></li>
+                  <li><a href="#" onClick={(e) => { e.preventDefault(); handleAuthNav("/Home/Recipes", { category: "Desserts" }); }} className="text-orange-100 hover:text-white hover:translate-x-2 transition-transform inline-flex items-center gap-2"><FaArrowRight className="text-xs text-orange-300" /> Decadent Desserts</a></li>
+                  <li><a href="#" onClick={(e) => { e.preventDefault(); handleAuthNav("/Home/Recipes", { category: "Dinner" }); }} className="text-orange-100 hover:text-white hover:translate-x-2 transition-transform inline-flex items-center gap-2"><FaArrowRight className="text-xs text-orange-300" /> Special Dinners</a></li>
                 </ul>
               </div>
 
