@@ -149,24 +149,24 @@ const Categories = ({ onDeletePrompt }) => {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-8 gap-4">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end mb-12 gap-8">
         <div>
-          <h2 className="text-4xl font-bold text-gray-800">Categories Management</h2>
-          <p className="text-gray-500 mt-2">Add, edit, and organize recipe categories across the platform.</p>
+          <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight leading-none">Categories Management</h2>
+          <p className="text-gray-500 mt-4 text-sm md:text-lg font-medium max-w-2xl">Add, edit, and organize recipe categories across the platform.</p>
         </div>
         
-        <div className="bg-white p-2 rounded-2xl shadow-sm border border-orange-100 flex items-center gap-2">
+        <div className="bg-white p-2.5 rounded-3xl shadow-lg shadow-orange-100/20 border border-orange-100 flex items-center gap-2 w-full lg:w-auto max-w-full group focus-within:ring-4 focus-within:ring-orange-50 transition-all">
            <input 
               type="text" 
               placeholder="New Category Name..." 
               value={newCategoryName}
               onChange={(e) => setNewCategoryName(e.target.value)}
-              className="px-4 py-2 outline-none w-48 focus:ring-2 focus:ring-orange-50 rounded-xl"
+              className="px-5 py-3 outline-none flex-1 min-w-0 bg-transparent rounded-2xl text-gray-700 font-medium placeholder:text-gray-400"
               onKeyPress={(e) => e.key === 'Enter' && handleAddCategory()}
            />
            <button 
               onClick={handleAddCategory}
-              className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-8 rounded-xl transition-all shadow-lg shadow-orange-100"
+              className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-10 rounded-2xl transition-all shadow-xl shadow-orange-200 active:scale-95 whitespace-nowrap"
            >
              Add
            </button>
